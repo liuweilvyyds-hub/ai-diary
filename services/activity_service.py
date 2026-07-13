@@ -1,4 +1,5 @@
 """Activity service: classification, summarization, comparison, and context building."""
+from __future__ import annotations
 import logging
 from collections import defaultdict
 from datetime import date, datetime, timedelta
