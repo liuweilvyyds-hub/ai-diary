@@ -6,10 +6,3 @@ pydantic
 httpx
 cryptography
 python-multipart
-fastapi
-uvicorn[standard]
-sqlalchemy
-aiosqlite
-pydantic
-httpx
-cryptography
