@@ -13,7 +13,7 @@ import os
 import time
 try:
     from ctypes import wintypes
-except ImportError:
+except (ImportError, ValueError):
     wintypes = None  # Linux doesn't have wintypes
 from datetime import datetime
 
