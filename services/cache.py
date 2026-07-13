@@ -12,7 +12,7 @@ class TTLCache:
         self.max_size = max_size
         self.default_ttl = default_ttl  # seconds
 
-    def get(self, key: str) -> Any | None:
+    def get(self, key: str) -> Optional[Any]:
         if key not in self._cache:
             return None
         expires_at, value = self._cache[key]
