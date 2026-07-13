@@ -1,14 +1,14 @@
 """Simple in-memory TTL cache for activity summaries."""
 import time
 from collections import OrderedDict
-from typing import Any, Optional
+from typing import Any, Optional, Tuple
 
 
 class TTLCache:
     """A simple TTL cache with max size eviction."""
 
     def __init__(self, max_size: int = 50, default_ttl: int = 120):
-        self._cache: OrderedDict[str, tuple[float, Any]] = OrderedDict()
+        self._cache: OrderedDict[str, Tuple[float, Any]] = OrderedDict()
         self.max_size = max_size
         self.default_ttl = default_ttl  # seconds
 

@@ -2,7 +2,7 @@
 import logging
 from collections import defaultdict
 from datetime import date, datetime, timedelta
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 from sqlalchemy.orm import Session
 
@@ -61,7 +61,7 @@ def summarize_privacy_logs(logs: List[ActivityLog]) -> Dict:
 
 
 # ---------- Event building ----------
-def event_daypart_label(start_time: str) -> tuple[str, str]:
+def event_daypart_label(start_time: str) -> Tuple[str, str]:
     try:
         hour = int((start_time or "0").split(":", 1)[0])
     except (TypeError, ValueError):
