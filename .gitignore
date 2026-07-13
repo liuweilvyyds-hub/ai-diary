@@ -1,0 +1,23 @@
+# Sensitive / local files
+.env
+*.db
+*.log
+__pycache__/
+*.pyc
+*.pyo
+
+# Uploads (user content)
+static/uploads/*
+!static/uploads/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local config overrides
+ai_config.json
+activity_config.json
