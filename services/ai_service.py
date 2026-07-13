@@ -1,5 +1,4 @@
 """AI service: model calls, retry, vision, and config management."""
-from __future__ import annotations
 import asyncio
 import base64
 import json
@@ -10,7 +9,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from typing import Awaitable, Callable, TypeVar
+from typing import Awaitable, Callable, TypeVar, List, Dict
 
 import httpx
 from fastapi import HTTPException
@@ -269,7 +268,7 @@ async def ensure_vision_service() -> None:
     raise RuntimeError(f"MiniCPM 视觉服务启动超时，请查看 {err_path}")
 
 
-async def describe_uploaded_images(image_refs: list, prompt: str = "") -> list[dict]:
+async def describe_uploaded_images(image_refs: list, prompt: str = "") -> List[Dict]:
     if not VISION_ENABLED:
         return [
             {"image": str(image_ref), "description": "", "ok": False, "skipped": True,

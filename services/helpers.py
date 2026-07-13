@@ -1,7 +1,7 @@
 """Helpers: formatting, humanization, and utility functions."""
-from __future__ import annotations
 from collections import defaultdict
 from datetime import datetime, timedelta
+from typing import List
 
 # ---------- Duration formatting ----------
 def format_duration(seconds: int) -> str:
@@ -64,7 +64,7 @@ def format_clock_minutes(minutes: int | None) -> str:
     return f"{minutes // 60:02d}:{minutes % 60:02d}"
 
 
-def average_seconds(values: list[int]) -> int:
+def average_seconds(values: List[int]) -> int:
     clean = [int(value or 0) for value in values if int(value or 0) > 0]
     return int(sum(clean) / len(clean)) if clean else 0
 

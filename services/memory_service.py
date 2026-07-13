@@ -1,7 +1,7 @@
 """Memory service: candidate generation and context building."""
-from __future__ import annotations
 from collections import defaultdict
 from datetime import datetime, timedelta
+from typing import List, Dict
 
 from sqlalchemy.orm import Session
 
@@ -41,7 +41,7 @@ def memory_exists(db: Session, content: str) -> bool:
 
 
 def add_memory_candidate(
-    candidates: list[dict],
+    candidates: List[Dict],
     db: Session,
     category: str,
     content: str,
@@ -73,10 +73,10 @@ def add_memory_candidate(
     })
 
 
-def generate_memory_candidates(db: Session, days: int = 7) -> list[dict]:
+def generate_memory_candidates(db: Session, days: int = 7) -> List[Dict]:
     days = max(1, min(days, 30))
     since = datetime.now() - timedelta(days=days)
-    candidates: list[dict] = []
+    candidates: List[Dict] = []
 
     logs = db.query(ActivityLog).filter(
         ActivityLog.started_at >= since,

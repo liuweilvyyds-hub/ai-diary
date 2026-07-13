@@ -1,8 +1,8 @@
 """Activity service: classification, summarization, comparison, and context building."""
-from __future__ import annotations
 import logging
 from collections import defaultdict
 from datetime import date, datetime, timedelta
+from typing import List, Dict
 
 from sqlalchemy.orm import Session
 
@@ -41,7 +41,7 @@ def classify_activity(app_name: str, window_title: str) -> str:
 
 
 # ---------- Privacy ----------
-def summarize_privacy_logs(logs: list[ActivityLog]) -> dict:
+def summarize_privacy_logs(logs: List[ActivityLog]) -> Dict:
     redacted_logs = [log for log in logs if (log.window_title or "").strip() == "[已脱敏]"]
     redacted_seconds = sum(int(log.duration_seconds or 0) for log in redacted_logs)
     by_app = defaultdict(int)
@@ -75,7 +75,7 @@ def event_daypart_label(start_time: str) -> tuple[str, str]:
     return "late_night", "凌晨"
 
 
-def build_activity_events(logs: list[ActivityLog], limit: int = 24) -> list[dict]:
+def build_activity_events(logs: List[ActivityLog], limit: int = 24) -> List[Dict]:
     events = []
     current = None
     for log in logs:
@@ -152,7 +152,7 @@ def build_activity_events(logs: list[ActivityLog], limit: int = 24) -> list[dict
     return clean_events
 
 
-def build_dayparts(events: list[dict]) -> list[dict]:
+def build_dayparts(events: List[Dict]) -> List[Dict]:
     buckets = {}
     order = ["late_night", "morning", "afternoon", "evening"]
     for event in (events or []):
@@ -194,7 +194,7 @@ def build_dayparts(events: list[dict]) -> list[dict]:
 
 
 # ---------- Summarization ----------
-def summarize_activity_logs(logs: list[ActivityLog], limit: int = 40) -> dict:
+def summarize_activity_logs(logs: List[ActivityLog], limit: int = 40) -> Dict:
     by_app = defaultdict(int)
     by_category = defaultdict(int)
     rows = []
@@ -303,7 +303,7 @@ def summarize_activity_rhythm(summary: dict) -> dict:
     }
 
 
-def average_activity_rhythm(rows: list[dict]) -> dict:
+def average_activity_rhythm(rows: List[Dict]) -> Dict:
     rhythms = [r.get("rhythm") or {} for r in rows if r.get("rhythm")]
     active = len(rhythms)
     if not active:
