@@ -11,7 +11,10 @@ import json
 import logging
 import os
 import time
-from ctypes import wintypes
+try:
+    from ctypes import wintypes
+except ImportError:
+    wintypes = None  # Linux doesn't have wintypes
 from datetime import datetime
 
 from database import ActivityLog, SessionLocal

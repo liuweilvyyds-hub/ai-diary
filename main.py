@@ -5,7 +5,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 import logging
 import ctypes
-from ctypes import wintypes
+try:
+    from ctypes import wintypes
+except ImportError:
+    wintypes = None  # Linux doesn't have wintypes
 from datetime import datetime, timedelta
 
 from fastapi import FastAPI
