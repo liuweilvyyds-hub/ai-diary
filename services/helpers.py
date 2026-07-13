@@ -1,7 +1,7 @@
 """Helpers: formatting, humanization, and utility functions."""
 from collections import defaultdict
 from datetime import datetime, timedelta
-from typing import List
+from typing import List, Optional
 
 # ---------- Duration formatting ----------
 def format_duration(seconds: int) -> str:
@@ -49,7 +49,7 @@ def activity_day_range(target):
 
 
 # ---------- Clock / minute helpers ----------
-def minutes_from_time(value: str | None) -> int | None:
+def minutes_from_time(value: Optional[str]) -> Optional[int]:
     try:
         hour, minute = (value or "").split(":", 1)
         return int(hour) * 60 + int(minute)
@@ -57,7 +57,7 @@ def minutes_from_time(value: str | None) -> int | None:
         return None
 
 
-def format_clock_minutes(minutes: int | None) -> str:
+def format_clock_minutes(minutes: Optional[int]) -> str:
     if minutes is None:
         return "--"
     minutes = max(0, min(int(minutes), 24 * 60 - 1))

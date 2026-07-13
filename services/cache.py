@@ -1,7 +1,7 @@
 """Simple in-memory TTL cache for activity summaries."""
 import time
 from collections import OrderedDict
-from typing import Any
+from typing import Any, Optional
 
 
 class TTLCache:
@@ -23,7 +23,7 @@ class TTLCache:
         self._cache.move_to_end(key)
         return value
 
-    def set(self, key: str, value: Any, ttl: int | None = None):
+    def set(self, key: str, value: Any, ttl: Optional[int] = None):
         if key in self._cache:
             del self._cache[key]
         elif len(self._cache) >= self.max_size:
